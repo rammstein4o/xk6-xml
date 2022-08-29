@@ -3,7 +3,7 @@ module github.com/rammstein4o/xk6-xml
 go 1.17
 
 require (
-	github.com/sbabiv/xml2map v1.2.1
+	github.com/clbanning/mxj/v2 v2.5.6
 	go.k6.io/k6 v0.39.0
 )
 

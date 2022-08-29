@@ -1,9 +1,7 @@
 package xml
 
 import (
-	"strings"
-
-	"github.com/sbabiv/xml2map"
+	"github.com/clbanning/mxj/v2"
 	"go.k6.io/k6/js/modules"
 )
 
@@ -16,6 +14,5 @@ type XML struct{}
 
 // Parse parses xml
 func (*XML) Parse(body string) (map[string]interface{}, error) {
-	decoder := xml2map.NewDecoder(strings.NewReader(body))
-	return decoder.Decode()
+	return mxj.NewMapXml([]byte(body))
 }

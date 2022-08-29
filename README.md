@@ -26,9 +26,39 @@ Then:
 
 ```javascript
 // script.js
-import sql from 'k6/x/xml';
+import xml from 'k6/x/xml';
 
 export default function () {
-    
+    const body = `
+    <?xml version="1.0"?>
+    <catalog>
+        <book id="bk101">
+            <author>Gambardella, Matthew</author>
+            <title>XML Developer's Guide</title>
+            <genre>Computer</genre>
+            <price>44.95</price>
+            <publish_date>2000-10-01</publish_date>
+            <description>
+                <![CDATA[An in-depth look at creating applications with XML.]]>
+            </description>
+        </book>
+        <book id="bk102">
+            <author>Ralls, Kim</author>
+            <title>Midnight Rain</title>
+            <genre>Fantasy</genre>
+            <price>5.95</price>
+            <publish_date>2000-12-16</publish_date>
+            <description>
+                <![CDATA[A former architect battles corporate zombies, an evil sorceress, and her own childhood to become queen of the world.]]>
+            </description>
+        </book>
+    </catalog>
+    `
+
+    const result = xml.parse(body);
+
+    result["catalog"]["book"].forEach(book => {
+        console.log(book["-id"], book["title"]);
+    });
 }
 ```
