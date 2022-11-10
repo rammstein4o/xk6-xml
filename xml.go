@@ -1,18 +1,20 @@
 package xml
 
 import (
-	"github.com/clbanning/mxj/v2"
+	"github.com/clbanning/mxj"
 	"go.k6.io/k6/js/modules"
 )
 
-func init() {
-	modules.Register("k6/x/xml", new(XML))
-}
-
 // XML is the k6 xml extension.
-type XML struct{}
+type XML struct {
+	vu modules.VU
+}
 
 // Parse parses xml
 func (*XML) Parse(body string) (map[string]interface{}, error) {
 	return mxj.NewMapXml([]byte(body))
+}
+
+func newXml(vu modules.VU) *XML {
+	return &XML{vu: vu}
 }
